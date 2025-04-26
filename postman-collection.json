@@ -1,0 +1,41 @@
+{
+  "info": {
+    "name": "ShuddhiCheck AI API Collection",
+    "_postman_id": "a1b2c3d4-5678-90ab-cdef-1234567890ab",
+    "description": "Collection to test ShuddhiCheck AI public APIs",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Validate Compliance",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer YOUR_API_KEY",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"facility_id\": \"IN-DEL-001\",\n  \"state_code\": \"DL\",\n  \"facility_type\": \"hospital\"\n}"
+        },
+        "url": {
+          "raw": "https://api.shuddhicheckai.com/v1/compliance/validate",
+          "protocol": "https",
+          "host": [
+            "api",
+            "shuddhicheckai",
+            "com"
+          ],
+          "path": [
+            "v1",
+            "compliance",
+            "validate"
+          ]
+        }
+      }
+    }
+  ]
+}
