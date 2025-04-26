@@ -1,0 +1,95 @@
+openapi: 3.0.3
+info:
+  title: ShuddhiCheck AI – Public Health Compliance API
+  description: |
+    ShuddhiCheck AI APIs enable real-time healthcare compliance validation, audit management, mobile compliance support, and regulatory localization across global regions.
+  version: "1.0.0"
+
+servers:
+  - url: https://api.shuddhicheckai.com/v1
+    description: Production Server
+
+paths:
+  /compliance/validate:
+    post:
+      summary: Validate healthcare facility compliance
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                facility_id:
+                  type: string
+                state_code:
+                  type: string
+                facility_type:
+                  type: string
+                  enum: [hospital, clinic, CAH]
+      responses:
+        '200':
+          description: Compliance validation result
+        '400':
+          description: Invalid request parameters
+        '403':
+          description: Authorization failed
+
+  /audit/templates/{state}:
+    get:
+      summary: Fetch audit templates by state
+      parameters:
+        - in: path
+          name: state
+          required: true
+          schema:
+            type: string
+        - in: query
+          name: facility_type
+          schema:
+            type: string
+        - in: query
+          name: language
+          schema:
+            type: string
+      responses:
+        '200':
+          description: List of audit templates
+
+  /audit/submit:
+    post:
+      summary: Submit healthcare facility audit results
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                audit_data:
+                  type: object
+                facility_id:
+                  type: string
+                timestamp:
+                  type: string
+      responses:
+        '200':
+          description: Audit submission success
+        '400':
+          description: Invalid request
+
+  /localization/medical-terms/{language}:
+    get:
+      summary: Fetch localized healthcare terminology
+      parameters:
+        - in: path
+          name: language
+          required: true
+          schema:
+            type: string
+            enum: [en, hi, ta, te, kn, ml]
+      responses:
+        '200':
+          description: Medical terms list
+
+components: {}
